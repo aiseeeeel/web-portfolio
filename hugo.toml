@@ -1,7 +1,11 @@
 baseURL = "https://aiseeeeel.github.io/web-portfolio/"
 languageCode = "ru"
-title = "Portfolio"
+title = "Айсел Агаларова - портфолио"
 theme = "hugo-developer-portfolio"
+
+canonifyURLs = true
+enableRobotsTXT = true
+
 [params.plugins]
   [[params.plugins.css]]
     URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"
@@ -10,3 +14,30 @@ theme = "hugo-developer-portfolio"
     URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"
   [[params.plugins.js]]
     URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"
+
+[menu]
+  [[menu.main]]
+    name = "Обо мне"
+    URL = "about"
+    weight = 1
+
+  [[menu.main]]
+    name = "Портфолио"
+    URL = "portfolio"
+    weight = 2
+
+  [[menu.main]]
+    name = "Контакты"
+    URL = "contact"
+    weight = 3
+
+[params]
+  home = "Главная"
+
+  description = "Портфолио Айсел Агаларовой - студентки 2 курса ИТМО направления «Компьютерные Технологии в дизайне» (трек «Разработка графических и веб-приложений»)"
+  author = "Айсел Агаларова"
+
+  [params.contact]
+    formAction = ""
+
+  [params.footer]
