@@ -1,0 +1,12 @@
+baseURL = "https://aiseeeeel.github.io/web-portfolio/"
+languageCode = "ru"
+title = "Portfolio"
+theme = "hugo-developer-portfolio"
+[params.plugins]
+  [[params.plugins.css]]
+    URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"
+
+  [[params.plugins.js]]
+    URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"
+  [[params.plugins.js]]
+    URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"
