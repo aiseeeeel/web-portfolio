@@ -3,7 +3,6 @@ languageCode = "en-gb"
 defaultContentLanguage = "en-gb"
 title = "My portfolio"
 theme = "ananke"
-publishDir = "docs"
 
 enableRobotsTXT = true
 
