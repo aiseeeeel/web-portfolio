@@ -1,26 +1,28 @@
 baseURL = "/"
-languageCode = "ru-RU"
-defaultContentLanguage = "ru"
-title = "Моё портфолио"
+languageCode = "en-gb"
+defaultContentLanguage = "en-gb"
+title = "My portfolio"
 theme = "ananke"
+publishDir = "docs"
 
 enableRobotsTXT = true
 
 [params]
-  description = "Привет! Это моё портфолио!"
-  author = "Агаларова Айсел"
-  background_color_class = "bg-black"
-  featured_image = "/images/img.jpg"
-  recent_posts_number = 3
+  description = "Portfolio"
+  author = "Agalarova Aisel"
+  background_color_class = "bg-light-blue"
+  custom_css = ["custom.css"]
+  read_more_copy = "Read more"
+  
 
 [menu]
 
   [[menu.main]]
-    name = "Главная"
+    name = "Main"
     url = "/"
     weight = 1
 
   [[menu.main]]
-    name = "Обо мне"
+    name = "About"
     url = "/about/"
     weight = 2
