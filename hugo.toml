@@ -30,3 +30,8 @@ enableRobotsTXT = true
     name = "Http Lab"
     url = "/http/"
     weight = 3  
+
+  [[menu.main]]
+    name = "Time Task"
+    url = "/time/"
+    weight = 4   
