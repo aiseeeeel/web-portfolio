@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Portfolio on My portfolio</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/web-portfolio/</link>
     <description>Recent content in Portfolio on My portfolio</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 28 Feb 2026 13:29:28 +0300</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/web-portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About me</title>
-      <link>//localhost:1313/about/</link>
+      <link>http://localhost:1313/web-portfolio/about/</link>
       <pubDate>Sat, 28 Feb 2026 13:29:28 +0300</pubDate>
-      <guid>//localhost:1313/about/</guid>
+      <guid>http://localhost:1313/web-portfolio/about/</guid>
       <description>&lt;p&gt;My name is Aisel Agalarova. I am a second-year student at ITMO University studying Computer Technologies in Design, with a focus on the track “Development of Graphic and Web Applications”.&lt;/p&gt;&#xA;&lt;p&gt;I am interested in web design, digital interfaces, and creative development. During my studies I work on various academic and personal projects related to web development, graphic design, and user interfaces.&lt;/p&gt;&#xA;&lt;p&gt;This portfolio website is where I collect and present my projects, experiments, and learning progress.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "D:/итмо дизайн/web-portfolio/web-portfolio",
+	"sourceRoot": "D:/итмо дизайн/клиент/web-portfolio",
 	"sources": [
 		"ananke/css/main.css"
 	],

@@ -25,3 +25,8 @@ enableRobotsTXT = true
     name = "About"
     url = "/about/"
     weight = 2
+
+  [[menu.main]]
+    name = "Http Lab"
+    url = "/http_lab/"
+    weight = 3  
