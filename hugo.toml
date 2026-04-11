@@ -28,5 +28,5 @@ enableRobotsTXT = true
 
   [[menu.main]]
     name = "Http Lab"
-    url = "/http_lab/"
+    url = "/http/"
     weight = 3  
