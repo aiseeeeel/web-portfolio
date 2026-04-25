@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webpack-Labs on My portfolio</title>
+    <link>http://localhost:1313/web-portfolio/webpack-lab/</link>
+    <description>Recent content in Webpack-Labs on My portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 25 Apr 2026 14:30:00 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/web-portfolio/webpack-lab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Сборка проекта с помощью Webpack и запуск через Docker</title>
+      <link>http://localhost:1313/web-portfolio/webpack-lab/webpack/</link>
+      <pubDate>Sat, 25 Apr 2026 14:30:00 +0300</pubDate>
+      <guid>http://localhost:1313/web-portfolio/webpack-lab/webpack/</guid>
+      <description>&lt;h2 id=&#34;используемые-инструменты&#34;&gt;Используемые инструменты&lt;/h2&gt;&#xA;&lt;p&gt;В работе использовались:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Node.js&lt;/code&gt; - среда выполнения JavaScript&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;npm&lt;/code&gt; - менеджер пакетов&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Webpack&lt;/code&gt; - сборщик проекта&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;webpack-cli&lt;/code&gt; - интерфейс командной строки для Webpack&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;serve&lt;/code&gt; - локальный сервер для запуска статической страницы&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;luxon&lt;/code&gt; - библиотека для работы с датой и временем&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Bootstrap CDN&lt;/code&gt; - подключение Bootstrap через ссылку в HTML&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Docker&lt;/code&gt; - контейнеризация приложения&lt;/li&gt;&#xA;&lt;li&gt;образ &lt;code&gt;node:24-alpine&lt;/code&gt; - облегчённый Node.js-образ для Docker&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;проверка-nodejs-и-npm&#34;&gt;Проверка Node.js и npm&lt;/h2&gt;&#xA;&lt;p&gt;Сначала я проверила установленную версию Node.js:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

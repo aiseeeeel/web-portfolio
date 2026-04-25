@@ -28,10 +28,15 @@ enableRobotsTXT = true
 
   [[menu.main]]
     name = "Http Lab"
-    url = "/http/"
+    url = "/http-lab/http/"
     weight = 3  
 
   [[menu.main]]
     name = "Time Task"
     url = "/time/"
     weight = 4   
+
+  [[menu.main]]
+    name = "Webpack"
+    url = "/webpack-lab/webpack/"
+    weight = 5    

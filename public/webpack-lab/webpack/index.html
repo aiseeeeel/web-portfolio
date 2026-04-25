@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head><script src="/web-portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=web-portfolio/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Сборка проекта с помощью Webpack и запуск через Docker | My portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Используемые инструменты
+В работе использовались:
+
+Node.js - среда выполнения JavaScript
+npm - менеджер пакетов
+Webpack - сборщик проекта
+webpack-cli - интерфейс командной строки для Webpack
+serve - локальный сервер для запуска статической страницы
+luxon - библиотека для работы с датой и временем
+Bootstrap CDN - подключение Bootstrap через ссылку в HTML
+Docker - контейнеризация приложения
+образ node:24-alpine - облегчённый Node.js-образ для Docker
+
+
+Проверка Node.js и npm
+Сначала я проверила установленную версию Node.js:">
+    <meta name="generator" content="Hugo 0.157.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="Agalarova Aisel">
+    
+
+    
+<link rel="stylesheet" href="/web-portfolio/ananke/css/main.min.css" >
+
+
+
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/web-portfolio/webpack-lab/webpack/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/web-portfolio/webpack-lab/webpack/">
+  <meta property="og:site_name" content="My portfolio">
+  <meta property="og:title" content="Сборка проекта с помощью Webpack и запуск через Docker">
+  <meta property="og:description" content="Используемые инструменты В работе использовались:
+Node.js - среда выполнения JavaScript npm - менеджер пакетов Webpack - сборщик проекта webpack-cli - интерфейс командной строки для Webpack serve - локальный сервер для запуска статической страницы luxon - библиотека для работы с датой и временем Bootstrap CDN - подключение Bootstrap через ссылку в HTML Docker - контейнеризация приложения образ node:24-alpine - облегчённый Node.js-образ для Docker Проверка Node.js и npm Сначала я проверила установленную версию Node.js:">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="webpack-lab">
+    <meta property="article:published_time" content="2026-04-25T14:30:00+03:00">
+    <meta property="article:modified_time" content="2026-04-25T14:30:00+03:00">
+
+  <meta itemprop="name" content="Сборка проекта с помощью Webpack и запуск через Docker">
+  <meta itemprop="description" content="Используемые инструменты В работе использовались:
+Node.js - среда выполнения JavaScript npm - менеджер пакетов Webpack - сборщик проекта webpack-cli - интерфейс командной строки для Webpack serve - локальный сервер для запуска статической страницы luxon - библиотека для работы с датой и временем Bootstrap CDN - подключение Bootstrap через ссылку в HTML Docker - контейнеризация приложения образ node:24-alpine - облегчённый Node.js-образ для Docker Проверка Node.js и npm Сначала я проверила установленную версию Node.js:">
+  <meta itemprop="datePublished" content="2026-04-25T14:30:00+03:00">
+  <meta itemprop="dateModified" content="2026-04-25T14:30:00+03:00">
+  <meta itemprop="wordCount" content="1323">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Сборка проекта с помощью Webpack и запуск через Docker">
+  <meta name="twitter:description" content="Используемые инструменты В работе использовались:
+Node.js - среда выполнения JavaScript npm - менеджер пакетов Webpack - сборщик проекта webpack-cli - интерфейс командной строки для Webpack serve - локальный сервер для запуска статической страницы luxon - библиотека для работы с датой и временем Bootstrap CDN - подключение Bootstrap через ссылку в HTML Docker - контейнеризация приложения образ node:24-alpine - облегчённый Node.js-образ для Docker Проверка Node.js и npm Сначала я проверила установленную версию Node.js:">
+
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Slackey&display=swap" rel="stylesheet">
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-webpack">
+    
+   
+  
+
+  <header>
+    <div class="bg-light-blue">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/web-portfolio/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My portfolio
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/web-portfolio/" title="">
+              Main
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/web-portfolio/about/" title="">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/web-portfolio/http-lab/http/" title="">
+              Http Lab
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/web-portfolio/time/" title="">
+              Time Task
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/web-portfolio/webpack-lab/webpack/" title="">
+              Webpack
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+
+  <article class="page-webpack flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Webpack-Labs
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Сборка проекта с помощью Webpack и запуск через Docker</h1>
+      
+      <p class="tracked"><strong>Agalarova Aisel</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2026-04-25T14:30:00+03:00">April 25, 2026</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h2 id="используемые-инструменты">Используемые инструменты</h2>
+<p>В работе использовались:</p>
+<ul>
+<li><code>Node.js</code> - среда выполнения JavaScript</li>
+<li><code>npm</code> - менеджер пакетов</li>
+<li><code>Webpack</code> - сборщик проекта</li>
+<li><code>webpack-cli</code> - интерфейс командной строки для Webpack</li>
+<li><code>serve</code> - локальный сервер для запуска статической страницы</li>
+<li><code>luxon</code> - библиотека для работы с датой и временем</li>
+<li><code>Bootstrap CDN</code> - подключение Bootstrap через ссылку в HTML</li>
+<li><code>Docker</code> - контейнеризация приложения</li>
+<li>образ <code>node:24-alpine</code> - облегчённый Node.js-образ для Docker</li>
+</ul>
+<hr>
+<h2 id="проверка-nodejs-и-npm">Проверка Node.js и npm</h2>
+<p>Сначала я проверила установленную версию Node.js:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>node -v
+</span></span></code></pre></div><p>В результате была получена версия:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>v24.12.0
+</span></span></code></pre></div><p>После этого я попробовала проверить версию <code>npm</code> стандартной командой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npm -v
+</span></span></code></pre></div><p>PowerShell заблокировал выполнение файла <code>npm.ps1</code>, так как в системе было отключено выполнение сценариев:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npm <span style="color:#960050;background-color:#1e0010">:</span> Невозможно загрузить файл C:\Program Files\nodejs\npm.ps1, так как выполнение сценариев отключено в этой системе.
+</span></span></code></pre></div><p>Для обхода этой проблемы я использовала команду <code>npm.cmd</code>, которая запускает npm через командный файл, а не через PowerShell-скрипт:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npm.cmd -v
+</span></span></code></pre></div><p>Команда выполнилась успешно:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#ae81ff">11.6</span>.2
+</span></span></code></pre></div><p>Дальше в работе я использовала именно <code>npm.cmd</code> и <code>npx.cmd</code>, чтобы не было ошибки.</p>
+<hr>
+<h2 id="создание-проекта">Создание проекта</h2>
+<p>Я инициализировала проект командой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npm.cmd init -y
+</span></span></code></pre></div><p>После выполнения команды автоматически был создан файл <code>package.json</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;webpack-lab&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;test&#34;</span>: <span style="color:#e6db74">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;keywords&#34;</span>: [],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;commonjs&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;luxon&#34;</span>: <span style="color:#e6db74">&#34;^3.7.2&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>В проекте была установлена зависимость <code>luxon</code>, поэтому в папке присутствовали <code>node_modules</code>, <code>package-lock.json</code> и запись о <code>luxon</code> в <code>dependencies</code>.</p>
+<hr>
+<h2 id="установка-webpack">Установка Webpack</h2>
+<p>Для сборки проекта были установлены developer-зависимости:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npm.cmd i -D webpack webpack-cli serve
+</span></span></code></pre></div><p>Команда завершилась успешно:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>added <span style="color:#ae81ff">182</span> packages, and audited <span style="color:#ae81ff">184</span> packages <span style="color:#66d9ef">in</span> 9s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">42</span> packages are looking <span style="color:#66d9ef">for</span> funding
+</span></span><span style="display:flex;"><span>  run `npm fund` <span style="color:#66d9ef">for</span> details
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>found <span style="color:#ae81ff">0</span> vulnerabilities
+</span></span></code></pre></div><p>После этого я проверила содержимое файла <code>package.json</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>type package.json
+</span></span></code></pre></div><p>В файле появились зависимости:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;webpack-lab&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;test&#34;</span>: <span style="color:#e6db74">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;keywords&#34;</span>: [],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;commonjs&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;luxon&#34;</span>: <span style="color:#e6db74">&#34;^3.7.2&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;serve&#34;</span>: <span style="color:#e6db74">&#34;^14.2.6&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;webpack&#34;</span>: <span style="color:#e6db74">&#34;^5.106.2&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;webpack-cli&#34;</span>: <span style="color:#e6db74">&#34;^7.0.2&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Здесь <code>luxon</code> находится в разделе <code>dependencies</code>, потому что эта библиотека используется в коде приложения. А <code>webpack</code>, <code>webpack-cli</code> и <code>serve</code> находятся в разделе <code>devDependencies</code>, потому что они нужны для разработки, сборки и локального запуска проекта.</p>
+<hr>
+<h2 id="создание-исходного-файла-srcindexjs">Создание исходного файла <code>src/index.js</code></h2>
+<p>Для исходного JavaScript-кода была создана папка <code>src</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>md src
+</span></span></code></pre></div><p>После этого я создала файл <code>index.js</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad src\index.js
+</span></span></code></pre></div><p>В файл был добавлен код:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DateTime</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;luxon&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hh</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;hh&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setInterval</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">hh</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DateTime</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">local</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">setLocale</span>(<span style="color:#e6db74">&#39;ru&#39;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">toFormat</span>(<span style="color:#e6db74">&#39;dd.LL.y HH:mm:ss&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">1000</span>);
+</span></span></code></pre></div><p>В первой строке импортируется объект <code>DateTime</code> из библиотеки <code>luxon</code>. Затем через <code>document.getElementById('hh')</code> находится HTML-элемент, в который будет выводиться дата и время. Функция <code>setInterval</code> обновляет содержимое этого элемента каждую секунду. Метод <code>DateTime.local()</code> получает текущие локальные дату и время. Метод <code>setLocale('ru')</code> задаёт русскую локаль. Метод <code>toFormat('dd.LL.y HH:mm:ss')</code> форматирует дату и время в виде:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>день.месяц.год часы:минуты:секунды
+</span></span></code></pre></div><hr>
+<h2 id="сборка-webpack">Сборка Webpack</h2>
+<p>Для сборки проекта я выполнила команду:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npx.cmd webpack
+</span></span></code></pre></div><p>Сначала сборка завершилась с ошибкой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>assets by status <span style="color:#ae81ff">378</span> bytes [<span style="color:#66d9ef">cached</span>] <span style="color:#ae81ff">1</span> asset
+</span></span><span style="display:flex;"><span>./src/index.js <span style="color:#ae81ff">213</span> bytes [<span style="color:#66d9ef">built] [code generated] [1 error</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WARNING <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">configuration</span>
+</span></span><span style="display:flex;"><span>The <span style="color:#e6db74">&#39;mode&#39;</span> option has not been set, webpack will fallback to <span style="color:#e6db74">&#39;production&#39;</span> <span style="color:#66d9ef">for</span> this value.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ERROR <span style="color:#66d9ef">in</span> ./src/index.js <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Module parse failed<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#39;import&#39;</span> and <span style="color:#e6db74">&#39;export&#39;</span> may appear only with <span style="color:#e6db74">&#39;sourceType: module&#39;</span> (<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>&gt; import { DateTime } from <span style="color:#e6db74">&#39;luxon&#39;</span>;
+</span></span></code></pre></div><p>Ошибка была связана с тем, что в <code>package.json</code> стояло значение:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#e6db74">&#34;type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;commonjs&#34;</span>
+</span></span></code></pre></div><p>При этом в файле <code>src/index.js</code> использовался синтаксис ES-модулей:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DateTime</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;luxon&#39;</span>;
+</span></span></code></pre></div><p>Из-за этого Webpack не смог корректно обработать импорт.</p>
+<p>Для исправления ошибки я открыла файл <code>package.json</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad package.json
+</span></span></code></pre></div><p>И заменила строку:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#e6db74">&#34;type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;commonjs&#34;</span>
+</span></span></code></pre></div><p>на:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#e6db74">&#34;type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;module&#34;</span>
+</span></span></code></pre></div><p>После исправления я снова выполнила сборку:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npx.cmd webpack
+</span></span></code></pre></div><p>Сборка прошла успешно:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>asset main.js <span style="color:#ae81ff">69</span> KiB [<span style="color:#66d9ef">emitted] [minimized</span>] (name<span style="color:#960050;background-color:#1e0010">:</span> main)
+</span></span><span style="display:flex;"><span>orphan modules <span style="color:#ae81ff">256</span> KiB [<span style="color:#66d9ef">orphan</span>] <span style="color:#ae81ff">1</span> module
+</span></span><span style="display:flex;"><span>./src/index.js + <span style="color:#ae81ff">1</span> modules <span style="color:#ae81ff">256</span> KiB [<span style="color:#66d9ef">built] [code generated</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WARNING <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">configuration</span>
+</span></span><span style="display:flex;"><span>The <span style="color:#e6db74">&#39;mode&#39;</span> option has not been set, webpack will fallback to <span style="color:#e6db74">&#39;production&#39;</span> <span style="color:#66d9ef">for</span> this value.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>webpack <span style="color:#ae81ff">5.106</span>.2 compiled with <span style="color:#ae81ff">1</span> warning <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">505</span> ms
+</span></span></code></pre></div><p>В папке появилась директория <code>dist</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Каталог<span style="color:#960050;background-color:#1e0010">:</span> D:\webpack-lab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Mode                 LastWriteTime         Length Name
+</span></span><span style="display:flex;"><span>----                 -------------         ------ ----
+</span></span><span style="display:flex;"><span>d-----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11</span>                dist
+</span></span><span style="display:flex;"><span>d-----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">09</span>                node_modules
+</span></span><span style="display:flex;"><span>d-----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10</span>                src
+</span></span><span style="display:flex;"><span>-a----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">09</span>          <span style="color:#ae81ff">82356</span> package-lock.json
+</span></span><span style="display:flex;"><span>-a----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11</span>            <span style="color:#ae81ff">399</span> package.json
+</span></span></code></pre></div><p>Содержимое папки <code>dist</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Каталог<span style="color:#960050;background-color:#1e0010">:</span> D:\webpack-lab\dist
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Mode                 LastWriteTime         Length Name
+</span></span><span style="display:flex;"><span>----                 -------------         ------ ----
+</span></span><span style="display:flex;"><span>-a----        <span style="color:#ae81ff">25.04</span>.2026     <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11</span>          <span style="color:#ae81ff">70627</span> main.js
+</span></span></code></pre></div><p>Файл <code>main.js</code> является итоговым bundle-файлом. В него Webpack собрал мой файл <code>src/index.js</code> и подключённую библиотеку <code>luxon</code>.</p>
+<hr>
+<h2 id="создание-страницы-indexhtml">Создание страницы <code>index.html</code></h2>
+<p>После сборки я создала страницу <code>index.html</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad index.html
+</span></span></code></pre></div><p>В неё был добавлен следующий код:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!doctype html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ru&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">title</span>&gt;Webpack Lab&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">link</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">body</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">background</span>: <span style="color:#ae81ff">#f5e8aa</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">font-family</span>: Arial, <span style="color:#66d9ef">sans-serif</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">page</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">min-height</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">vh</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">time-box</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">background</span>: <span style="color:#ae81ff">#ffffff</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#e89eb8</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">24</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">48</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">32</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">box-shadow</span>: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">8</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">24</span><span style="color:#66d9ef">px</span> rgba(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.08</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">center</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">time-label</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#ae81ff">12</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">14</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">letter-spacing</span>: <span style="color:#ae81ff">0.08</span><span style="color:#66d9ef">em</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">text-transform</span>: <span style="color:#66d9ef">uppercase</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#777</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">time-value</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#ae81ff">16</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">font-size</span>: <span style="color:#a6e22e">clamp</span>(<span style="color:#ae81ff">48</span><span style="color:#66d9ef">px</span>, <span style="color:#ae81ff">9</span><span style="color:#66d9ef">vw</span>, <span style="color:#ae81ff">96</span><span style="color:#66d9ef">px</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">font-weight</span>: <span style="color:#ae81ff">700</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">1.1</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#222</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">time-text</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#444</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">main</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page container d-flex align-items-center justify-content-center py-5&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">section</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row justify-content-center w-100&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-12 col-md-10 col-lg-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time-box&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time-label&#34;</span>&gt;Часы&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">h1</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time-value&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hh&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            Загрузка...
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time-text&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            Текущее время выводится с помощью Luxon, а код собран через Webpack.
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">section</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">main</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./dist/main.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p>На странице есть элемент:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time-value&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hh&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  Загрузка...
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span></code></pre></div><p>Именно в этот заголовок JavaScript вставляет текущее время. Связь между HTML и JavaScript происходит через идентификатор:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>id=&#34;hh&#34;
+</span></span></code></pre></div><p>А в файле <code>src/index.js</code> этот элемент находится строкой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hh</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;hh&#39;</span>);
+</span></span></code></pre></div><p>Собранный Webpack-файл подключается в конце страницы:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./dist/main.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><hr>
+<h2 id="запуск-локального-сервера">Запуск локального сервера</h2>
+<p>Для проверки страницы я запустила локальный сервер:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>npx.cmd serve .
+</span></span></code></pre></div><p>После запуска сервер вывел адреса, по которым доступна страница:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">┌────────────────────────────────────────────┐</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>                                            <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   Serving!                                 <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>                                            <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   - Local<span style="color:#960050;background-color:#1e0010">:</span>    http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3000</span>        <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   - Network<span style="color:#960050;background-color:#1e0010">:</span>  http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">26.197</span>.212.<span style="color:#ae81ff">233</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3000</span>   <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>                                            <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   Copied local address to clipboard!       <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>                                            <span style="color:#960050;background-color:#1e0010">│</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└────────────────────────────────────────────┘</span>
+</span></span></code></pre></div><p><img src="../webpack.png" alt=""></p>
+<hr>
+<h2 id="создание-dockerfile">Создание Dockerfile</h2>
+<p>Для выполнения этого же проекта внутри Docker-контейнера я создала файл <code>Dockerfile</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad Dockerfile
+</span></span></code></pre></div><p>Содержимое файла:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:24-alpine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> package*.json ./<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> npm install<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> npx webpack<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXPOSE</span> <span style="color:#e6db74">3000</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;npx&#34;</span>, <span style="color:#e6db74">&#34;serve&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;-l&#34;</span>, <span style="color:#e6db74">&#34;3000&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Первая строка задаёт базовый образ:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:24-alpine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>создаёт рабочую папку <code>/app</code> внутри контейнера. Все дальнейшие команды будут выполняться относительно этой папки.</p>
+<p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> package*.json ./<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>копирует в контейнер файлы <code>package.json</code> и <code>package-lock.json</code>. Это нужно сделать до копирования всего проекта, чтобы Docker мог отдельно установить зависимости.</p>
+<p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> npm install<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>устанавливает зависимости внутри контейнера.</p>
+<p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>копирует остальные файлы проекта в контейнер.</p>
+<p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> npx webpack<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>запускает сборку проекта внутри контейнера. В результате внутри контейнера создаётся папка <code>dist</code> и файл <code>dist/main.js</code>.</p>
+<p>Команда:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">EXPOSE</span> <span style="color:#e6db74">3000</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>указывает, что приложение внутри контейнера работает на порту <code>3000</code>.</p>
+<p>Последняя строка:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;npx&#34;</span>, <span style="color:#e6db74">&#34;serve&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;-l&#34;</span>, <span style="color:#e6db74">&#34;3000&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>задаёт команду, которая будет выполняться при запуске контейнера. Она запускает статический сервер <code>serve</code> на порту <code>3000</code>.</p>
+<hr>
+<h2 id="сборка-docker-образа">Сборка Docker-образа</h2>
+<p>Я выполнила сборку:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>docker build -t webpack-lab .
+</span></span></code></pre></div><p>Сборка завершилась успешно:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>[+] Building <span style="color:#ae81ff">14</span>.1s (<span style="color:#ae81ff">11</span>/<span style="color:#ae81ff">11</span>) FINISHED                      docker<span style="color:#960050;background-color:#1e0010">:</span>desktop-linux
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#66d9ef">internal</span>] load build definition from Dockerfile                     <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; =&gt; transferring dockerfile<span style="color:#960050;background-color:#1e0010">:</span> 193B                                     <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#66d9ef">internal</span>] load metadata <span style="color:#66d9ef">for</span> docker.io/library/node<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">24</span>-alpine        <span style="color:#ae81ff">2</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#66d9ef">internal</span>] load .dockerignore                                        <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">1</span>/<span style="color:#ae81ff">6</span>] FROM docker.io/library/node<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">24</span>-alpine                          <span style="color:#ae81ff">6</span>.5s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">2</span>/<span style="color:#ae81ff">6</span>] WORKDIR /app                                                   <span style="color:#ae81ff">0</span>.1s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">3</span>/<span style="color:#ae81ff">6</span>] COPY package*.json ./                                          <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">4</span>/<span style="color:#ae81ff">6</span>] RUN npm install                                                <span style="color:#ae81ff">2</span>.1s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">5</span>/<span style="color:#ae81ff">6</span>] COPY . .                                                       <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; [<span style="color:#ae81ff">6</span>/<span style="color:#ae81ff">6</span>] RUN npx webpack                                                <span style="color:#ae81ff">1</span>.7s
+</span></span><span style="display:flex;"><span> =&gt; exporting to image                                                   <span style="color:#ae81ff">1</span>.5s
+</span></span><span style="display:flex;"><span> =&gt; =&gt; naming to docker.io/library/webpack-lab<span style="color:#960050;background-color:#1e0010">:</span>latest                    <span style="color:#ae81ff">0</span>.0s
+</span></span><span style="display:flex;"><span> =&gt; =&gt; unpacking to docker.io/library/webpack-lab<span style="color:#960050;background-color:#1e0010">:</span>latest                 <span style="color:#ae81ff">0</span>.5s
+</span></span></code></pre></div><hr>
+<h2 id="запуск-приложения-через-docker">Запуск приложения через Docker</h2>
+<p>После сборки образа я запустила контейнер командой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>docker run --rm -p <span style="color:#ae81ff">3000</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3000</span> webpack-lab
+</span></span></code></pre></div><p>После запуска контейнера сервер начал принимать подключения:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>INFO  Accepting connections at http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3000</span>
+</span></span></code></pre></div><p><img src="../webpack-docker.png" alt=""></p>
+<hr>
+<h2 id="последовательность-команд-для-запуска-проекта-локально">Последовательность команд для запуска проекта локально</h2>
+<p>Для локального запуска проекта используется следующая последовательность:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd D:\webpack-lab
+</span></span><span style="display:flex;"><span>npm.cmd install
+</span></span><span style="display:flex;"><span>npx.cmd webpack
+</span></span><span style="display:flex;"><span>npx.cmd serve .
+</span></span></code></pre></div><p>После запуска сервера приложение открывается по адресу:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>http://localhost:3000
+</span></span></code></pre></div><hr>
+<h2 id="последовательность-команд-для-запуска-через-docker">Последовательность команд для запуска через Docker</h2>
+<p>Для запуска проекта через Docker используется:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd D:\webpack-lab
+</span></span><span style="display:flex;"><span>docker build -t webpack-lab .
+</span></span><span style="display:flex;"><span>docker run --rm -p <span style="color:#ae81ff">3000</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3000</span> webpack-lab
+</span></span></code></pre></div><p>После запуска контейнера приложение также открывается по адресу:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>http://localhost:3000
+</span></span></code></pre></div><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+
+    </main>
+    <footer class="bg-light-blue bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/web-portfolio/" >
+    &copy;  My portfolio 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

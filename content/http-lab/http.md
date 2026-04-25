@@ -16,7 +16,7 @@ GET / HTTP/1.1
 Host: example.com
 ```
 В первой строке указаны метод `GET`, путь `/` и версия протокола `HTTP/1.1`. Заголовок `Host: example.com` и сообщает серверу, к какому хосту обращается клиент. Пустая строка после заголовков показывает серверу, что запрос завершён.
-![](/images/http-lab/telnet-get.png)
+![](../telnet-get.png)
 В ответ сервер вернул сообщение со статусом `HTTP/1.1 200 OK`, заголовки ответа и код страницы. Запрос был успешно обработан и сервер передал клиенту содержимое главной страницы.
 
 ---
@@ -37,7 +37,7 @@ Content-Length: 16
 {"name":"Aisel"}
 ```
 В стартовой строке указаны метод `POST`, путь `/post` и версия протокола `HTTP/1.1`. Заголовок `Host` задаёт адрес сервера. Заголовок `Accept: application/json` сообщает, что клиент ожидает получить ответ в формате JSON. Заголовок `Content-Type: application/json` показывает, что тело запроса передаётся в формате JSON. Заголовок `Content-Length: 16` указывает длину тела запроса в байтах. После пустой строки передаётся само тело запроса.
-![](/images/http-lab/telnet-post.png)
+![](../telnet-post.png)
 Сервер вернул JSON-ответ, в котором были переданные мной данные. POST-запрос был успешно отправлен и обработан.
 
 ---
@@ -48,7 +48,7 @@ Content-Length: 16
 curl.exe -i http://example.com
 ```
 Флаг `-i` выводит тело ответа, HTTP-заголовки и строку статуса. 
-![](/images/http-lab/cURL-get.png)
+![](../cURL-get.png)
 В результате выполнения команды был получен ответ со статусом `HTTP/1.1 200 OK`, заголовками и HTML-кодом страницы `example.com`.
 GET-запрос успешно выполнен с помощью cURL.
 
@@ -60,7 +60,7 @@ GET-запрос успешно выполнен с помощью cURL.
 curl.exe -X POST "http://httpbin.org/post" -H "Accept: application/json" -H "Content-Type: application/json" -d '{\"name\":\"Aisel\"}'
 ```
 Параметр `-X POST` явно задаёт метод `POST`. Параметр `-H "Accept: application/json"` сообщает серверу, что клиент ожидает JSON-ответ. Параметр `-H "Content-Type: application/json"` указывает тип передаваемых данных. Параметр `-d` передаёт тело запроса.
-![](/images/http-lab/cURL-post.png)
+![](../cURL-post.png)
 В ответ сервер вернул JSON-документ, в котором поле `json` содержало отправленные мной данные. POST-запрос был успешно выполнен.
 
 ---
@@ -68,9 +68,9 @@ curl.exe -X POST "http://httpbin.org/post" -H "Accept: application/json" -H "Con
 ## GET-запрос к API Банка России через Postman
 Для выполнения GET-запроса в я использовала веб-версию сервиса Postman.
 В Postman сначала я выбрала метод `GET`:
-![](/images/http-lab/postman-get.png)
+![](../postman-get.png)
 Потом в адресную строку я вставила URL:
-![](/images/http-lab/postman-link.png)
+![](../postman-link.png)
 ```text
 https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=01/04/2026&date_req2=11/04/2026&VAL_NM_RQ=R01235
 ```

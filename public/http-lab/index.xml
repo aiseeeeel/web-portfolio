@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Http-Labs on My portfolio</title>
+    <link>http://localhost:1313/web-portfolio/http-lab/</link>
+    <description>Recent content in Http-Labs on My portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 11 Apr 2026 13:00:00 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/web-portfolio/http-lab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Протокол HTTP. Клиент-серверное взаимодействие</title>
+      <link>http://localhost:1313/web-portfolio/http-lab/http/</link>
+      <pubDate>Sat, 11 Apr 2026 13:00:00 +0300</pubDate>
+      <guid>http://localhost:1313/web-portfolio/http-lab/http/</guid>
+      <description>&lt;h2 id=&#34;get-запрос-через-telnet&#34;&gt;GET-запрос через Telnet&lt;/h2&gt;&#xA;&lt;p&gt;Для отправки GET-запроса я использовала тестовый сайт &lt;code&gt;example.com&lt;/code&gt;, доступный по протоколу HTTP на порту 80.&#xA;Подключение к серверу:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;telnet example.com &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;После установки соединения в терминале я ввела запрос:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;example.com&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;В первой строке указаны метод &lt;code&gt;GET&lt;/code&gt;, путь &lt;code&gt;/&lt;/code&gt; и версия протокола &lt;code&gt;HTTP/1.1&lt;/code&gt;. Заголовок &lt;code&gt;Host: example.com&lt;/code&gt; и сообщает серверу, к какому хосту обращается клиент. Пустая строка после заголовков показывает серверу, что запрос завершён.&#xA;&lt;img src=&#34;../telnet-get.png&#34; alt=&#34;&#34;&gt;&#xA;В ответ сервер вернул сообщение со статусом &lt;code&gt;HTTP/1.1 200 OK&lt;/code&gt;, заголовки ответа и код страницы. Запрос был успешно обработан и сервер передал клиенту содержимое главной страницы.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

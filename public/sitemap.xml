@@ -2,10 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/web-portfolio/about/</loc>
-    <lastmod>2026-02-28T13:29:28+03:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/web-portfolio/</loc>
+    <lastmod>2026-04-25T14:30:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/webpack-lab/</loc>
+    <lastmod>2026-04-25T14:30:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/webpack-lab/webpack/</loc>
+    <lastmod>2026-04-25T14:30:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/time/</loc>
+    <lastmod>2026-04-11T14:00:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/http-lab/</loc>
+    <lastmod>2026-04-11T13:00:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/http-lab/http/</loc>
+    <lastmod>2026-04-11T13:00:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/web-portfolio/about/</loc>
     <lastmod>2026-02-28T13:29:28+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/web-portfolio/categories/</loc>
