@@ -40,3 +40,8 @@ enableRobotsTXT = true
     name = "Webpack"
     url = "/webpack-lab/webpack/"
     weight = 5    
+
+  [[menu.main]]
+    name = "Luxon 2"
+    url = "/luxon-stage-2/luxon-stage-2/"
+    weight = 6  
