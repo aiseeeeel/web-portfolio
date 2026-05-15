@@ -161,4 +161,7 @@ npx.cmd webpack
 npx.cmd serve .
 ```
 
+---
+
+## Результат
 ![](../luxon-clock.png)

@@ -45,3 +45,9 @@ enableRobotsTXT = true
     name = "Luxon 2"
     url = "/luxon-stage-2/luxon-stage-2/"
     weight = 6  
+
+  [[menu.main]]
+    name = "Luxon 3"
+    url = "/luxon-stage-3/luxon-stage-3/"
+    weight = 7
+
