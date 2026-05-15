@@ -4,30 +4,13 @@ draft = false
 title = "Интеграция Bootstrap 5 в приложение с Luxon. Этап 2"
 +++
 
-## Используемые инструменты
-
-В работе использовались:
-
-- `Node.js` - среда выполнения JavaScript
-- `npm` - менеджер пакетов
-- `Webpack` - сборщик проекта
-- `webpack-cli` - интерфейс командной строки для Webpack
-- `serve` - локальный сервер для запуска страницы
-- `luxon` - библиотека для работы с датой и временем
-- `Bootstrap 5` - CSS-фреймворк для создания интерфейса
-- `Bootstrap Modal` - компонент Bootstrap для всплывающих окон
-
----
-
 ## Исходный JavaScript-код
 
 Для вывода даты и времени использовался файл `src/index.js`:
 
 ```javascript
 import { DateTime } from 'luxon';
-
 const hh = document.getElementById('hh');
-
 setInterval(() => {
   hh.textContent = DateTime
     .local()
@@ -37,62 +20,19 @@ setInterval(() => {
 ```
 
 В первой строке импортируется объект `DateTime` из библиотеки `luxon`.
+Далее через `document.getElementById('hh')` находится HTML-элемент, в который будет выводиться текущее время.
 
-Далее через:
+Функция `setInterval()` обновляет содержимое элемента каждую секунду.
 
-```javascript
-document.getElementById('hh')
-```
+Метод `DateTime.local()` получает текущие дату и время.
 
-находится HTML-элемент, в который будет выводиться текущее время.
-
-Функция:
-
-```javascript
-setInterval(...)
-```
-
-обновляет содержимое элемента каждую секунду.
-
-Метод:
-
-```javascript
-DateTime.local()
-```
-
-получает текущие дату и время.
-
-Метод:
-
-```javascript
-setLocale('ru')
-```
-
-устанавливает русскую локаль.
-
-Метод:
-
-```javascript
-toFormat('dd.LL.y HH:mm:ss')
-```
-
-форматирует дату и время в виде:
-
-```text
-день.месяц.год часы:минуты:секунды
-```
+Метод `toFormat('dd.LL.y HH:mm:ss')` форматирует дату и время в виде день.месяц.год часы:минуты:секунды
 
 ---
 
 ## Создание страницы с Bootstrap 5
 
 Для интерфейса приложения был изменён файл `index.html`:
-
-```powershell
-notepad index.html
-```
-
-В файл был добавлен следующий код:
 
 ```html
 <!doctype html>
@@ -101,64 +41,41 @@ notepad index.html
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Webpack Lab</title>
-
   <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet">
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
   <main class="container min-vh-100 d-flex align-items-center">
     <div class="row w-100">
       <div class="col-2"></div>
-
       <div class="col-8 d-grid">
-        <button
-          type="button"
-          class="btn btn-danger btn-lg py-5"
-          data-bs-toggle="modal"
-          data-bs-target="#timeModal">
+        <button type="button" class="btn btn-danger btn-lg py-5" data-bs-toggle="modal" data-bs-target="#timeModal">
           Показать время
         </button>
       </div>
-
       <div class="col-2"></div>
     </div>
   </main>
-
   <div class="modal fade" id="timeModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-
         <div class="modal-header">
           <h5 class="modal-title">Agalarova Aisel</h5>
-
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal">
+          <button type="button" class="btn-close" data-bs-dismiss="modal">
           </button>
         </div>
-
         <div class="modal-body text-center">
           <h2 id="hh">Загрузка...</h2>
         </div>
-
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Закрыть
           </button>
         </div>
-
       </div>
     </div>
   </div>
-
   <script src="./dist/main.js"></script>
-
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
   </script>
@@ -166,34 +83,16 @@ notepad index.html
 </html>
 ```
 
----
-
-## Создание сетки Bootstrap
-
-На странице была создана сетка Bootstrap:
+На странице была создана сетка Bootstrap. Колонки имеют соотношение 2-8-2:
 
 ```html
 <div class="row w-100">
   <div class="col-2"></div>
-
   <div class="col-8 d-grid">
   </div>
-
   <div class="col-2"></div>
 </div>
 ```
-
-Колонки имеют соотношение:
-
-```text
-2 - 8 - 2
-```
-
-Центральная колонка используется для размещения кнопки.
-
----
-
-## Создание кнопки
 
 В центральной колонке была размещена большая красная кнопка:
 
@@ -207,35 +106,11 @@ notepad index.html
 </button>
 ```
 
-Класс:
+`btn-danger` делает кнопку красной.
+`btn-lg` увеличивает размер кнопки.
+`d-grid` позволяет кнопке занимать всю ширину центральной колонки.
 
-```html
-btn-danger
-```
-
-делает кнопку красной.
-
-Класс:
-
-```html
-btn-lg
-```
-
-увеличивает размер кнопки.
-
-А класс:
-
-```html
-d-grid
-```
-
-у родительского контейнера позволяет кнопке занимать всю ширину центральной колонки.
-
----
-
-## Создание модального окна
-
-Для отображения времени использовалось модальное окно Bootstrap:
+Для отображения времени использовано модальное окно Bootstrap:
 
 ```html
 <div class="modal fade" id="timeModal" tabindex="-1">
@@ -245,20 +120,6 @@ d-grid
 
 ```html
 <h5 class="modal-title">Agalarova Aisel</h5>
-```
-
-Основное содержимое окна:
-
-```html
-<h2 id="hh">Загрузка...</h2>
-```
-
-Именно в этот элемент JavaScript вставляет текущие дату и время.
-
-Связь между HTML и JavaScript происходит через идентификатор:
-
-```html
-id="hh"
 ```
 
 Кнопка закрытия в правом верхнем углу:
@@ -282,91 +143,22 @@ id="hh"
 </button>
 ```
 
-Атрибут:
-
-```html
-data-bs-dismiss="modal"
-```
-
-закрывает модальное окно.
+Атрибут `data-bs-dismiss="modal"` закрывает модальное окно.
 
 ---
 
 ## Сборка проекта
 
-После изменения файлов была выполнена сборка проекта:
+Сборка проекта:
 
 ```powershell
 npx.cmd webpack
 ```
 
-Webpack успешно собрал проект и создал файл:
-
-```text
-dist/main.js
-```
-
-При сборке появилось предупреждение:
-
-```text
-The 'mode' option has not been set, webpack will fallback to 'production' for this value.
-```
-
-Это предупреждение не является ошибкой. Проект был успешно собран.
-
----
-
-## Запуск локального сервера
-
-Для запуска проекта использовалась команда:
+Запуск проекта:
 
 ```powershell
 npx.cmd serve .
 ```
 
-После запуска сервер вывел локальный адрес:
-
-```text
-http://localhost:3000
-```
-
-По этому адресу приложение стало доступно в браузере.
-
----
-
-## Результат работы
-
-После запуска страницы отображается большая красная кнопка:
-
-```text
-Показать время
-```
-
-При нажатии на кнопку открывается модальное окно Bootstrap.
-
-В заголовке окна отображаются имя и фамилия выполнившего работу:
-
-```text
-Agalarova Aisel
-```
-
-Внутри окна отображаются текущие дата и время, полученные с помощью библиотеки `luxon`.
-
-Закрыть окно можно двумя способами:
-
-- крестиком в правом верхнем углу;
-- кнопкой `Закрыть` в правом нижнем углу.
-
-![](../luxon-bootstrap.png)
-
----
-
-## Последовательность выполненных действий
-
-```powershell
-cd D:\webpack-lab
-notepad src\index.js
-notepad index.html
-npx.cmd webpack
-npx.cmd serve .
-```
+![](../luxon-clock.png)
